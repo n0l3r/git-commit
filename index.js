@@ -43,36 +43,7 @@ const makeCommit = async (git, n) => {
     })
 }
 
-const loadCurrentCommitEligibility = () => {
-    axios.get('https://route-api.dodoex.io/dodoapi/getdodoroute', {
-        params: {
-            fromTokenAddress: `0x794c979ea09Be49624C87E0ae9F0E0c3753a3e6a`,
-            fromTokenDecimals: `18`,
-            toTokenAddress: `0x4988a896b1227218e4A686fdE5EabdcAbd91571f`,
-            toTokenDecimals: `6`,
-            fromAmount: doneCommitAmount+`0000000000000000000000`,
-            slippage: `3`,
-            userAddr: `0x637Ab14AeC49F0cC54c735fB82bC3BFF5390d50E`,
-            chainId: `1313161554`,
-        }
-    })
-    .then(function (response) {
-        if (response.data.status==200) {
-            data=response.data.data
-            console.log(`\n\nCONGRATULATIONS!\n`)
-            console.log(process.env.GIT_EMAIL, `(`+process.env.GIT_NAME+`)`)
-            console.log(`You get:`, parseInt(doneCommitAmount+`0000`), `OSS`)
-            console.log(`Price (OSS/USDT):`, data.resAmount, `USDT`)
-            console.log(`Total Commits:`, doneCommitAmount)
-        } else {
-            console.log(`Something wen't wrong:`, response.data.data)
-        }
-        
-    })
-    .catch(function (error) {
-        console.log(`Something wen't wrong:`, error)
-    })
-}
+
 
 git
     .addConfig('user.name', process.env.GIT_NAME)
